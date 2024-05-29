@@ -1,0 +1,32 @@
+﻿@page "/first"
+<PageTitle>First Componet</PageTitle>
+<h3>FirstComponent</h3>
+
+<input type="button" class="btn btn-success" 
+    value="Click Me" @onclick='()=>ShowMessage("hiiiiiiiii")'/>
+
+<!--Razor Syntax-->
+<!--one way binding-->
+<h2>One Way Binding</h2>
+<h3>@MEssage</h3>
+<input type="text" class="form-control" value="@MEssage"/>
+<hr />
+<h2>Two Way Binding </h2>
+<input type="text" class="form-control" @bind-value="@MEssage" />
+<hr />
+<h2>Two Way Binding on input (With Update)</h2>
+<input type="text" class="form-control" @bind-value="@MEssage" @bind-value:event="oninput"/>
+
+
+
+@code {
+    public string MEssage { get; set; } = "Local Message";
+
+    private void ShowMessage(string msg)
+    {
+        MEssage = msg;
+        Console.WriteLine($"Helllo FRo C# to Console app {msg}");
+    }
+}
+
+<!--Class FistCompoent:ComponentBase-->
