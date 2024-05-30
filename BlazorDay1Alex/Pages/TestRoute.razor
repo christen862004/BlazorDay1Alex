@@ -1,0 +1,36 @@
+﻿@page "/test/{id:int}/{name}"
+<PageTitle>Test Route</PageTitle>
+<h3>TestRoute</h3>
+<h2>Id = @id</h2>
+<h3>Name= @name</h3>
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+
+    [Parameter]
+    public string name { get; set; }
+
+    public TestRoute()
+    {
+        Console.WriteLine($"Constructor id={id}");    
+    }
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Console.WriteLine($"SetParametersAsync id={id}");
+
+        return base.SetParametersAsync(parameters);
+    }
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"OnInitialized id={id}");
+
+        base.OnInitialized();
+    }
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine($"OnParametersSet id={id}");
+
+        base.OnParametersSet();
+    }
+}

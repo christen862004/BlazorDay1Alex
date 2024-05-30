@@ -3,6 +3,7 @@ using System.Xml.Linq;
 
 namespace BlazorDay1Alex.Pages
 {
+   
     public partial class  DepartmentComponent
     {
         public int SelectDeptID { get; set; } = 3;

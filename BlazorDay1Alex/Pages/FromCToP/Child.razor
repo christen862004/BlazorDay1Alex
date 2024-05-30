@@ -1,0 +1,17 @@
+﻿<div style="margin:10px;border:10px solid red;padding:10px">
+
+    <h3>Child</h3>
+    <input type="button" value="Increase" @onclick="IncreaseCounter" class="btn btn-success" />
+    <h4>@Counter</h4>
+</div>
+@code {
+    public int Counter { get; set; } = 0;
+    [Parameter]
+    public EventCallback<int> CounterChangeEvent { get; set; }
+
+    private void IncreaseCounter()
+    {
+        Counter++;
+        CounterChangeEvent.InvokeAsync(Counter);
+    }
+}

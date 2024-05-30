@@ -1,3 +1,4 @@
+using BlazorDay1Alex.Models;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -14,6 +15,8 @@ namespace BlazorDay1Alex
             //Change title
 
             //Day3 
+            builder.Services.AddScoped<IService<Employee>,EmployeeService>();
+            builder.Services.AddScoped<IService<Department>, DepartmentService>();
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             
             await builder.Build().RunAsync();

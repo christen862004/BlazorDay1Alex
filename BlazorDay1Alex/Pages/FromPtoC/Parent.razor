@@ -1,0 +1,9 @@
+﻿@page "/parent1"
+<h3>Parent</h3>
+<input @bind-value="LocalMsg" class="form-control" />
+<Child Message="@LocalMsg"></Child>
+
+<Child Message="Msg2 FRom Parent"></Child>
+@code {
+    public string LocalMsg { get; set; } = "local messagge from Parent";
+}

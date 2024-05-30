@@ -1,0 +1,14 @@
+﻿<div style="margin:10px;border:10px solid red">
+    <h3>Child</h3>
+    <h4>Age = @Age</h4>
+    <h4>MEssage = @Msg</h4>
+</div>
+
+@code {
+    //[Parameter]//route - parent componet
+    [CascadingParameter(Name ="Age")]//All Tree
+    public int Age { get; set; }
+
+    [CascadingParameter(Name = "Message")]
+    public string Msg { get; set; }
+}

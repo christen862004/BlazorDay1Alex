@@ -1,0 +1,69 @@
+﻿@page "/Emps/Edit/{id:int}"
+<PageTitle>Edit Emp Info</PageTitle>
+<h3>EmployeeEditComponent</h3>
+@if (EmpObj != null)
+{
+    <!--Edit Form :Built in Componet EditForm (Model) Validation-->
+    <EditForm Model="EmpObj" OnSubmit="SaveEmp">
+        <label>Name</label>
+        <InputText @bind-Value="EmpObj.Name" class="form form-control"></InputText>
+        
+        <label>Salary</label>
+        <InputNumber @bind-Value="EmpObj.Salary" class="form form-control"></InputNumber>
+        
+        <label>Address</label>
+        <InputText @bind-Value="EmpObj.Address" class="form form-control"></InputText>
+
+        <label>Image</label>
+        <InputText @bind-Value="EmpObj.ImageUrl" class="form form-control"></InputText>
+
+        <label>DeptID</label>
+        <InputSelect @bind-Value="EmpObj.DeptId" class="form form-control">
+            @foreach (var deptItem in DEptList)
+        {
+            <option value="@deptItem.Id">@deptItem.Name</option>
+        }
+
+        </InputSelect>
+
+        <input type="submit" value="Save" class="btn btn-success" />
+    </EditForm>
+    <h2 style="background-color:antiquewhite">
+        @EmpObj.Name - @EmpObj.Address - @EmpObj.Salary - @EmpObj.DeptId
+    </h2>
+}
+else
+{
+    <h1>Wait or Id Invalid </h1>
+}
+<a href="/Emps">Back To List</a>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    [Inject]
+    public IService<Employee> EmpService { get; set; }
+
+    [Inject]
+    public IService<Department> DeptService { get; set; }
+
+    [Inject]
+    public NavigationManager NavManager { get; set; }
+
+    public Employee EmpObj { get; set; }
+
+    public List<Department> DEptList { get; set; }
+    protected override void OnInitialized()
+    {
+        EmpObj= EmpService.GetByID(id);
+        DEptList = DeptService.GetAll();
+
+        base.OnInitialized();
+    }
+    private void SaveEmp()
+    {
+        Console.WriteLine("Emp SAve");
+        NavManager.NavigateTo("/Emps");
+    }
+}
