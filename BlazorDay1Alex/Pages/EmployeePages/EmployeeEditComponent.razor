@@ -4,18 +4,25 @@
 @if (EmpObj != null)
 {
     <!--Edit Form :Built in Componet EditForm (Model) Validation-->
-    <EditForm Model="EmpObj" OnSubmit="SaveEmp">
+    <EditForm Model="EmpObj" OnValidSubmit="SaveEmp" OnInvalidSubmit="ShowAlert">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+       
         <label>Name</label>
         <InputText @bind-Value="EmpObj.Name" class="form form-control"></InputText>
+        <ValidationMessage For="()=>EmpObj.Name"></ValidationMessage>
         
         <label>Salary</label>
         <InputNumber @bind-Value="EmpObj.Salary" class="form form-control"></InputNumber>
+        <ValidationMessage For="()=>EmpObj.Salary"></ValidationMessage>
         
         <label>Address</label>
         <InputText @bind-Value="EmpObj.Address" class="form form-control"></InputText>
+        <ValidationMessage For="()=>EmpObj.Address"></ValidationMessage>
 
         <label>Image</label>
         <InputText @bind-Value="EmpObj.ImageUrl" class="form form-control"></InputText>
+        <ValidationMessage For="()=>EmpObj.ImageUrl"></ValidationMessage>
 
         <label>DeptID</label>
         <InputSelect @bind-Value="EmpObj.DeptId" class="form form-control">
@@ -23,7 +30,7 @@
         {
             <option value="@deptItem.Id">@deptItem.Name</option>
         }
-
+        <ValidationMessage For="()=>EmpObj.DeptId"></ValidationMessage>
         </InputSelect>
 
         <input type="submit" value="Save" class="btn btn-success" />
@@ -65,5 +72,9 @@ else
     {
         Console.WriteLine("Emp SAve");
         NavManager.NavigateTo("/Emps");
+    }
+    private void ShowAlert()
+    {
+        Console.WriteLine("Invalid Calling ");
     }
 }
